@@ -1,7 +1,7 @@
 "use strict";
 const toxiproxyClient = require("toxiproxy-node-client");
 
-const toxiproxy = new toxiproxyClient.Toxiproxy("http://localhost:8474");
+const toxiproxy = new toxiproxyClient.Toxiproxy("http://172.28.1.2:8474");
 
 const proxyBody = {
   listen: "0.0.0.0:6666",

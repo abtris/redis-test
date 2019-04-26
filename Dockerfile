@@ -1,2 +1,5 @@
 FROM node:8-alpine
-WORKDIR '/var/www/app'
+COPY . /var/www/app
+WORKDIR /var/www/app
+RUN npm install
+
