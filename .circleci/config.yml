@@ -3,8 +3,6 @@ jobs:
   build:
     docker:
       - image: circleci/node:8
-      - image: redis
-      - image: shopify/toxiproxy
     environment:
       TEST_RESULTS: /tmp/test-results
 
