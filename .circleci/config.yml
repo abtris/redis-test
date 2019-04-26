@@ -17,6 +17,13 @@ jobs:
             sudo mv ~/docker-compose /usr/local/bin/docker-compose
 
       - run:
+          name: Install dockerize
+          command: |
+            wget https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz -O ~/dockerize-linux-amd64-v0.6.1.tar.gz
+            cd ~ && tar -xzf dockerize-linux-amd64-v0.6.1.tar.gz
+            sudo mv ~/dockerize /usr/local/bin/dockerize
+
+      - run:
           name: Build service
           command: docker-compose build --pull
 
@@ -25,6 +32,11 @@ jobs:
           command: |
             set -x
             docker-compose up -d
+
+      - run:
+          name: Wait for webserver
+          command: |
+            /usr/local/bin/dockerize -wait http://localhost:3000 -timeout 1m
 
       - run:
           name: Run tests
