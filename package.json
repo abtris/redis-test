@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.16.4",
-    "redis": "^2.8.0"
+    "redis": "^2.8.0",
+    "toxiproxy-node-client": "^2.0.6"
   }
 }
