@@ -46,6 +46,8 @@ get var1
 ## Example with adding latency
 
 ```
+docker-compose up -d
+node setup-proxy.js
 toxiproxy-cli toxic add redis1 --type latency --attribute latency=2000
 toxiproxy-cli inspect redis1
 ```
