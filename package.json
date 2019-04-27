@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/mocha/bin/mocha"
   },
   "author": "Ladislav Prskavec <ladislav@prskavec.net> (http://www.prskavec.net)",
   "license": "MIT",
@@ -12,5 +12,8 @@
     "express": "^4.16.4",
     "redis": "^2.8.0",
     "toxiproxy-node-client": "^2.0.6"
+  },
+  "devDependencies": {
+    "mocha": "^6.1.4"
   }
 }
