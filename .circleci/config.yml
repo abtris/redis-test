@@ -37,9 +37,7 @@ jobs:
           name: Run tests
           command: |
             npm install
-            node setup-proxy.js
-            curl -v http://172.28.1.3:3000
-
+            npm test
       - store_artifacts:
           path: /tmp/test-results
           destination: raw-test-output
