@@ -15,6 +15,7 @@
     "toxiproxy-node-client": "^2.0.6"
   },
   "devDependencies": {
-    "mocha": "^6.1.4"
+    "mocha": "^6.1.4",
+    "prettier": "1.17.0"
   }
 }
