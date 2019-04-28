@@ -2,9 +2,10 @@
   "name": "redis-test",
   "version": "0.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "src/server.js",
   "scripts": {
-    "test": "./node_modules/mocha/bin/mocha"
+    "test": "./node_modules/mocha/bin/mocha",
+    "start": "node src/server.js"
   },
   "author": "Ladislav Prskavec <ladislav@prskavec.net> (http://www.prskavec.net)",
   "license": "MIT",
