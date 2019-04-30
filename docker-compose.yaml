@@ -52,7 +52,7 @@ services:
       - REDIS_URL=redis://cache
       - TOXIPROXY_URL=http://proxy
       - NODE_ENV=test
-      - PORT=3000
+      - PORT=4000
     networks:
       custom:
         ipv4_address: 172.28.0.40

@@ -37,6 +37,12 @@ jobs:
           name: Run tests
           command: |
             docker-compose run test
+
+      - run:
+          name: Cleanup
+          command: |
+            docker-compose stop
+            docker-compose down
       - store_artifacts:
           path: /tmp/test-results
           destination: raw-test-output
