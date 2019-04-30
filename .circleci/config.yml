@@ -39,10 +39,6 @@ jobs:
             docker-compose ps
             docker-compose logs
       - run:
-          name: Run tests
-          command: |
-            docker-compose run test
-      - run:
           name: Post cleanup
           command: |
             docker-compose stop
