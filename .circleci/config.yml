@@ -10,6 +10,11 @@ jobs:
       - checkout
       - setup_remote_docker
       - run:
+          name: Cleanup
+          command: |
+            docker-compose down || true
+            docker system prune -f
+      - run:
           name: Install Docker Compose
           command: |
             curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
@@ -37,9 +42,8 @@ jobs:
           name: Run tests
           command: |
             docker-compose run test
-
       - run:
-          name: Cleanup
+          name: Post cleanup
           command: |
             docker-compose stop
             docker-compose down
