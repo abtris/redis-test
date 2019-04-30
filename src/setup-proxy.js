@@ -7,11 +7,16 @@ const proxyBody = {
   upstream: '172.28.0.10:6379',
 };
 
+
 function createProxy (proxyConfig = null) {
-  if (proxyConfig === null) {
-    toxiproxy.createProxy (proxyBody);
+  if (proxyConfig && toxiproxy.get(proxyConfig.name)) {
+    return toxiproxy.get(proxyBody.name)
   } else {
-    toxiproxy.createProxy (proxyConfig);
+    if (proxyConfig === null) {
+      return toxiproxy.createProxy(proxyBody)
+    } else {
+      return toxiproxy.createProxy(proxyConfig)
+    }
   }
 }
 // Latency, Jitter value in ms
@@ -35,4 +40,5 @@ module.exports = {
   createProxy: createProxy,
   addLatency: addLatency,
   addTimeout: addTimeout,
-};
+  proxyBody: proxyBody,
+}

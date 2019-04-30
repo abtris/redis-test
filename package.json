@@ -5,6 +5,7 @@
   "main": "src/server.js",
   "scripts": {
     "test": "./node_modules/mocha/bin/mocha",
+    "integration-test": "./node_modules/mocha/bin/mocha test/integration/*",
     "start": "node src/server.js"
   },
   "author": "Ladislav Prskavec <ladislav@prskavec.net> (http://www.prskavec.net)",
