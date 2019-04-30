@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/abtris/redis-test.svg?style=svg)](https://circleci.com/gh/abtris/redis-test)
+
 # Using ToxiProxy with Redis to test clients
 
 Testing redis client and his resilience.
