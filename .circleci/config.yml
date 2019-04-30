@@ -36,9 +36,7 @@ jobs:
       - run:
           name: Run tests
           command: |
-            npm install
-            npm test
-            npm run integration-test
+            docker-compose run test
       - store_artifacts:
           path: /tmp/test-results
           destination: raw-test-output

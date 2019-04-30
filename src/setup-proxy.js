@@ -1,5 +1,5 @@
 const toxiproxyClient = require ('toxiproxy-node-client');
-const toxiproxy = new toxiproxyClient.Toxiproxy ('http://localhost:8474');
+const toxiproxy = new toxiproxyClient.Toxiproxy (process.env.TOXIPROXY_URL + ":8474");
 
 const proxyBody = {
   listen: '0.0.0.0:6666',

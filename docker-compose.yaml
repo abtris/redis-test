@@ -40,7 +40,24 @@ services:
       custom:
         ipv4_address: 172.28.0.30
     command:
-      sh -c 'node server.js'
+      sh -c 'npm start'
+  test:
+    build: .
+    links:
+      - redis
+    depends_on:
+      - redis
+      - toxiproxy
+    environment:
+      - REDIS_URL=redis://cache
+      - TOXIPROXY_URL=http://proxy
+      - NODE_ENV=test
+      - PORT=3000
+    networks:
+      custom:
+        ipv4_address: 172.28.0.40
+    command:
+      sh -c 'npm run integration-test'
 networks:
   custom:
     ipam:
