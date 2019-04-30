@@ -6,42 +6,61 @@ services:
     expose:
       - 6379
     ports:
-      - 6379:6379
+      - "6379:6379"
     networks:
-      testing_net:
-        ipv4_address: 172.28.1.1
+      custom:
+        ipv4_address: 172.28.0.10
   toxiproxy:
     image: shopify/toxiproxy
     container_name: proxy
     expose:
-      - 8474
-      - 6666
+      - "6666"
+      - "8474"
     ports:
-      - 6666:6666
-      - 8474:8474
+      - "6666:6666"
+      - "8474:8474"
     networks:
-      testing_net:
-        ipv4_address: 172.28.1.2
+      custom:
+        ipv4_address: 172.28.0.20
   app:
-    build: ./
-    volumes:
-      - ./:/var/www/app
+    build: .
     links:
       - redis
+    depends_on:
+      - redis
+    expose:
+      - 3000
     ports:
-      - 3000:3000
+      - "3000:3000"
     environment:
       - REDIS_URL=redis://cache
       - NODE_ENV=development
       - PORT=3000
     networks:
-      testing_net:
-        ipv4_address: 172.28.1.3
+      custom:
+        ipv4_address: 172.28.0.30
     command:
-      sh -c 'npm i && node server.js'
+      sh -c 'npm start'
+  test:
+    build: .
+    links:
+      - redis
+    depends_on:
+      - redis
+      - toxiproxy
+    environment:
+      - REDIS_URL=redis://cache
+      - TOXIPROXY_URL=http://proxy
+      - NODE_ENV=test
+      - PORT=4000
+    networks:
+      custom:
+        ipv4_address: 172.28.0.40
+    command:
+      sh -c 'npm run integration-test'
 networks:
-    testing_net:
-        ipam:
-            driver: default
-            config:
-                - subnet: 172.28.0.0/16
+  custom:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.0.0/16

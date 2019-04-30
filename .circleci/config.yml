@@ -1,0 +1,51 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:8
+    environment:
+      TEST_RESULTS: /tmp/test-results
+
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Cleanup
+          command: |
+            docker-compose down || true
+            docker system prune -f
+      - run:
+          name: Install Docker Compose
+          command: |
+            curl -L https://github.com/docker/compose/releases/download/1.19.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+            chmod +x ~/docker-compose
+            sudo mv ~/docker-compose /usr/local/bin/docker-compose
+
+      - run:
+          name: Install dockerize
+          command: |
+            wget https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz -O ~/dockerize-linux-amd64-v0.6.1.tar.gz
+            cd ~ && tar -xzf dockerize-linux-amd64-v0.6.1.tar.gz
+            sudo mv ~/dockerize /usr/local/bin/dockerize
+
+      - run:
+          name: Build service
+          command: docker-compose build --pull
+
+      - run:
+          name: Start container and verify it's working
+          command: |
+            docker-compose up -d
+            docker-compose ps
+            docker-compose logs
+      - run:
+          name: Post cleanup
+          command: |
+            docker-compose stop
+            docker-compose down
+      - store_artifacts:
+          path: /tmp/test-results
+          destination: raw-test-output
+
+      - store_test_results:
+          path: /tmp/test-results
