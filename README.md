@@ -1,89 +1,49 @@
-# SRE Redis test
+# Using ToxiProxy with Redis to test clients
 
-Testing redis client and his resilience
+Testing redis client and his resilience.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
 ### Prerequisites
 
-What things you need to install the software and how to install them
+- [docker](https://docs.docker.com/install/overview/)
+- [docker-compose](https://docs.docker.com/compose/install/)
 
 ```
 docker pull shopify/toxiproxy
 docker pull redis
-npm install
 ```
 
-### Installing
+### Run
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
+You can run app and test
 
 ```
-Give the example
+docker-compose up -d
 ```
 
-And repeat
+and read the logs
 
 ```
-until finished
+docker-compose logs
 ```
-
-End with an example of getting some data out of the system or using it for a little demo
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
 ```
-Give an example
+docker-compose run test
 ```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+- **Ladislav Prskavec** - _Initial work_ - [abtris](https://github.com/abtris)
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+- [Toxi Proxy from Shopify](https://github.com/Shopify/toxiproxy)
+- [NodeJS toxi proxy client](https://github.com/ihsw/toxiproxy-node-client)
+- [Chaos Engineering: Testing known unknowns using ToxiProxy](https://medium.com/@ravindraprasad/testing-known-unknowns-using-toxiproxy-75dfc9d0dc1)
