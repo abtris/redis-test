@@ -1,5 +1,8 @@
 const express = require ('express');
 const redis = require ('redis');
+const debug = require ('debug');
+const critical = debug ('app:error');
+const info = debug ('app:info');
 
 const app = express ();
 const client = redis.createClient ({
@@ -8,11 +11,13 @@ const client = redis.createClient ({
     if (options.error && options.error.code === 'ECONNREFUSED') {
       // End reconnecting on a specific error and flush all commands with
       // a individual error
+      critical ('The server refused the connection');
       return new Error ('The server refused the connection');
     }
     if (options.total_retry_time > 1000 * 60 * 60) {
       // End reconnecting after a specific timeout and flush all commands
       // with a individual error
+      critical ('Retry time exhausted');
       return new Error ('Retry time exhausted');
     }
     if (options.attempt > 10) {
@@ -25,7 +30,7 @@ const client = redis.createClient ({
 });
 
 client.on ('error', function (err) {
-  console.log ('REDIS_ERROR ' + err);
+  critical ('REDIS_ERROR ' + err);
 });
 
 app.get ('/store/:key', (req, res) => {
@@ -52,5 +57,5 @@ app.get ('/', (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen (PORT, () => {
-  console.log (`Server listening on port ${PORT}`);
+  info (`Server listening on port ${PORT}`);
 });
